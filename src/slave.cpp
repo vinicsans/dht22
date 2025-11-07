@@ -4,25 +4,15 @@
 #include "slave.h"
 #include <Lcd.h>
 
-int mainLedPin = 5;
 BluetoothSerial BTSlave;
 
-enum LedState {
-    STATE_OFF,
-    STATE_ON,
-    STATE_BLINKING
-};
-
-LedState currentLedState = STATE_OFF;
 String prefix = "[TEMPERATURA]";
 
 void setupSlave() {
-    setupLED(mainLedPin);
-    turnOffLED(mainLedPin);
-    currentLedState = STATE_OFF;
-    
     Serial.begin(9600);
     Serial.setTimeout(5000);
+
+    setupLCD();
 
     if (BTSlave.begin("webvinicDevice"))
     {
@@ -52,22 +42,4 @@ void loopSlave() {
         }
     }
 
-    switch (currentLedState) {
-        case STATE_OFF:
-            turnOffLED(mainLedPin);
-            break;
-        case STATE_ON:
-            turnOnLED(mainLedPin);
-            break;
-        case STATE_BLINKING:
-            blinkLed(mainLedPin);
-            break;
-    }
-
-    if (Serial.available())
-    {
-        String messageToSend = Serial.readStringUntil('\n');
-        messageToSend.trim();
-        BTSlave.println(messageToSend);
-    }
 }

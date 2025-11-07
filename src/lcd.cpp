@@ -22,7 +22,6 @@ void setupLCD() {
 }
 
 void displayTemperature(float temperature) {
-	
     lcd.clear();
 
     lcd.setCursor(0, 0);
