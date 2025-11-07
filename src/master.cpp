@@ -60,8 +60,9 @@ void loopMaster(){
     }
 
     if (temperature != lastTemperature) {
-        BTSerial.println(temperature);
-        Serial.println(temperature);
+        String message = "[TEMPERATURA] " + String(temperature, 2);
+        BTSerial.println(message);
+        Serial.println(message);
     }
 
     lastTemperature = temperature;
