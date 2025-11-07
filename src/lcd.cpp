@@ -17,22 +17,38 @@ void setupLCD() {
 
     lcd.clear();
     lcd.setCursor(0, 0); 
-    lcd.print("Medindo a temperatura...");
+    lcd.print("Medindo...");
     delay(1000); 
 }
 
-void displayTemperature(float temperature) {
+void displayData(float temperature, float umidity) {
     lcd.clear();
-
     lcd.setCursor(0, 0);
-
     lcd.print("Temperatura: ");
-
     lcd.setCursor(0, 1);
+    lcd.print("Umidade: ");
+
+    if (temperature == -999) {
+        lcd.setCursor(13, 0);
+        lcd.print("Não detectado");
+    } else {
+        lcd.setCursor(13, 0);
+        lcd.print(temperature);
+
+        lcd.setCursor(18, 0);
+        lcd.write(0xDF); 
+        lcd.print("C");
+    }
+
+    if (umidity == -999) {
+        lcd.setCursor(9, 1);
+        lcd.print("Não detectado");
+    } else {
+        lcd.setCursor(9, 1);
+        lcd.print(umidity);
+
+        lcd.setCursor(13, 1);
+        lcd.print("%");
+    }
     
-    lcd.print(temperature);
-    
-	lcd.setCursor(6, 1);
-    lcd.write(0xDF); 
-    lcd.print("C");
 }

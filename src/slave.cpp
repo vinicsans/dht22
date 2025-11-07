@@ -6,7 +6,8 @@
 
 BluetoothSerial BTSlave;
 
-String prefix = "[TEMPERATURA]";
+String prefix_temp = "[TEMPERATURA]";
+String prefix_humd = "[UMIDADE]";
 
 void setupSlave() {
     Serial.begin(9600);
@@ -28,18 +29,29 @@ void setupSlave() {
 void loopSlave() {
     if (BTSlave.available())
     {
+
+        float temperature = -999;;
+        float umidity = -999;
+
         String receivedMessage = BTSlave.readStringUntil('\n');
         receivedMessage.trim();
         Serial.printf("Evento Recebido: %s\n", receivedMessage.c_str());
 
         if (receivedMessage.startsWith("[TEMPERATURA]")) {
-            int prefixLength = prefix.length();
+            int prefixLength = prefix_temp.length();
             String numberString = receivedMessage.substring(prefixLength);
             numberString.trim();
-            float temperature = numberString.toFloat();
-
-            displayTemperature(temperature);
+            temperature = numberString.toFloat();
         }
+
+        if (receivedMessage.startsWith("[UMIDADE]")) {
+            int prefixLength = prefix_humd.length();
+            String numberString = receivedMessage.substring(prefixLength);
+            numberString.trim();
+            umidity = numberString.toFloat();
+        }
+
+        displayData(temperature, umidity);
     }
 
 }

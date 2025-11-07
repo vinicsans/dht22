@@ -75,3 +75,21 @@ float getTemperatureAsFloat() {
     return event.temperature;
   }
 }
+float getRelativeHumidity() {
+  delay(delayMS);
+
+  sensors_event_t event;
+  
+  dht.humidity().getEvent(&event);
+
+  Serial.println(event.relative_humidity);
+
+  if (isnan(event.relative_humidity)) {
+    Serial.println(F("Error reading humidity!")); 
+    return -999; 
+  }
+  else {
+    // Retorna o valor lido
+    return event.relative_humidity;
+  }
+}

@@ -3,5 +3,6 @@
 
 void setupSensor();
 float getTemperatureAsFloat();
+float getRelativeHumidity();
 
 #endif

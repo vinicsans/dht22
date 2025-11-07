@@ -11,7 +11,8 @@ unsigned long pressStartTime = 0;
 bool longPressSent = false;     
 const long LONG_PRESS_TIME = 2000; 
 
-int lastTemperature = 0;
+float lastHumidity = 0;
+float lastTemperature = 0;
 
 u_int8_t slaveAddress[] = {0xF4, 0x65, 0x0B, 0x47, 0x1D, 0x6A};
 
@@ -44,6 +45,7 @@ void setupMaster(){
 void loopMaster(){
 
     float temperature = getTemperatureAsFloat();
+    float humidity = getRelativeHumidity();
 
     if (BTSerial.available())
     {
@@ -65,5 +67,12 @@ void loopMaster(){
         Serial.println(message);
     }
 
+    if (humidity != lastHumidity) {
+        String message = "[UMIDADE] " + String(humidity, 2);
+        BTSerial.println(message);
+        Serial.println(message);
+    }
+
     lastTemperature = temperature;
+    lastHumidity = humidity;
 }

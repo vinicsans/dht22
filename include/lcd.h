@@ -2,6 +2,6 @@
 #define LED_H
 
 void setupLCD();
-void displayTemperature(float temperature);
+void displayData(float temperature, float humidity);
 
 #endif
