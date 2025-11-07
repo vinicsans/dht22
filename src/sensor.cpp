@@ -60,12 +60,9 @@ void setupSensor() {
 }
 
 float getTemperatureAsFloat() {
-  delay(delayMS);
-
   sensors_event_t event;
   dht.temperature().getEvent(&event);
 
-  Serial.println(event.temperature);
 
   if (isnan(event.temperature)) {
     Serial.println(F("Error reading temperature!"));
@@ -76,13 +73,9 @@ float getTemperatureAsFloat() {
   }
 }
 float getRelativeHumidity() {
-  delay(delayMS);
-
   sensors_event_t event;
   
   dht.humidity().getEvent(&event);
-
-  Serial.println(event.relative_humidity);
 
   if (isnan(event.relative_humidity)) {
     Serial.println(F("Error reading humidity!")); 

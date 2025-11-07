@@ -17,8 +17,19 @@ void setupLCD() {
 
     lcd.clear();
     lcd.setCursor(0, 0); 
-    lcd.print("Medindo...");
+    lcd.print("Conectando...");
     delay(1000); 
+}
+
+void displayConnection(bool sucess) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+
+    if (sucess) { 
+        lcd.print("Conectado com sucesso.");
+    } else {
+        lcd.print("Falha na conexão.");
+    }
 }
 
 void displayData(float temperature, float umidity) {
@@ -30,7 +41,7 @@ void displayData(float temperature, float umidity) {
 
     if (temperature == -999) {
         lcd.setCursor(13, 0);
-        lcd.print("Não detectado");
+        lcd.print("N/A");
     } else {
         lcd.setCursor(13, 0);
         lcd.print(temperature);
@@ -42,7 +53,7 @@ void displayData(float temperature, float umidity) {
 
     if (umidity == -999) {
         lcd.setCursor(9, 1);
-        lcd.print("Não detectado");
+        lcd.print("N/A");
     } else {
         lcd.setCursor(9, 1);
         lcd.print(umidity);

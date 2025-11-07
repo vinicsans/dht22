@@ -3,5 +3,6 @@
 
 void setupLCD();
 void displayData(float temperature, float humidity);
+void displayConnection(bool sucess);
 
 #endif
