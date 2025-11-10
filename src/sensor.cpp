@@ -33,7 +33,7 @@ void setupSensor() {
   // Initialize device.
   dht.begin();
   Serial.println(F("DHTxx Unified Sensor Example"));
-  // Print temperature sensor details.
+
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
   Serial.println(F("------------------------------------"));
@@ -45,7 +45,7 @@ void setupSensor() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("°C"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("°C"));
   Serial.println(F("------------------------------------"));
-  // Print humidity sensor details.
+
   dht.humidity().getSensor(&sensor);
   Serial.println(F("Humidity Sensor"));
   Serial.print  (F("Sensor Type: ")); Serial.println(sensor.name);
@@ -55,7 +55,7 @@ void setupSensor() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
-  // Set delay between sensor readings based on sensor details.
+
   delayMS = sensor.min_delay / 1000;
 }
 
@@ -82,7 +82,6 @@ float getRelativeHumidity() {
     return -999; 
   }
   else {
-    // Retorna o valor lido
     return event.relative_humidity;
   }
 }
