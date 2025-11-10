@@ -23,14 +23,13 @@ void blinkLed(int ledPin) {
   if (currentTime - beforeTime >= interval) {
     beforeTime = currentTime;
 
-    // Inverte o estado do LED
+
     if (ledState == LOW) {
       ledState = HIGH;
     } else {
       ledState = LOW;
     }
 
-    // Aplica o novo estado ao pino do LED
     digitalWrite(ledPin, ledState);
   }
 }
